@@ -226,16 +226,16 @@ var _default =
     },
     // 获取楼层数据列表
     getFloorList: function getFloorList() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var _yield$uni$$http$get3, res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:_context3.next = 2;return (
-                  uni.$http.get('/api/public/v1/home/floordata'));case 2:_yield$uni$$http$get3 = _context3.sent;res = _yield$uni$$http$get3.data;
-                console.log(res, 2333);if (!(
-                !res.meta.status === 200)) {_context3.next = 7;break;}return _context3.abrupt("return", uni.$showMsg());case 7:
+                  uni.$http.get('/api/public/v1/home/floordata'));case 2:_yield$uni$$http$get3 = _context3.sent;res = _yield$uni$$http$get3.data;if (!(
+
+                !res.meta.status === 200)) {_context3.next = 6;break;}return _context3.abrupt("return", uni.$showMsg());case 6:
                 // 双重for循环处理跳转路径
                 res.message.forEach(function (floor) {
                   floor.product_list.forEach(function (prod) {
                     prod.url = '/subpkg/goods_list/goods_list?' + prod.navigator_url.split('?')[1];
                   });
                 });
-                _this3.floorList = res.message;case 9:case "end":return _context3.stop();}}}, _callee3);}))();
+                _this3.floorList = res.message;case 8:case "end":return _context3.stop();}}}, _callee3);}))();
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

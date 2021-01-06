@@ -64,7 +64,7 @@
       // 获取轮播图数据
       async getSwiperList(){
         const {data: res} = await uni.$http.get('/api/public/v1/home/swiperdata')
-        // console.log(res)
+        // console.log(res, 233333)
         // 请求失败
         if(!res.meta.status === 200) return uni.$showMsg()
         this.swiperList = res.message
@@ -89,7 +89,7 @@
       // 获取楼层数据列表
       async getFloorList(){
         const {data: res} = await uni.$http.get('/api/public/v1/home/floordata')
-        console.log(res, 2333)
+        // console.log(res, 2333)
         if(!res.meta.status === 200) return uni.$showMsg()
         // 双重for循环处理跳转路径
         res.message.forEach(floor =>{

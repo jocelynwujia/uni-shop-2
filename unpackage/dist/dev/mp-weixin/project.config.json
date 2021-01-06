@@ -42,18 +42,26 @@
   "libVersion": "",
   "appid": "wx4e7262221d01f108",
   "projectname": "uni-shop-2",
+  "simulatorType": "wechat",
+  "simulatorPluginLibVersion": {},
   "condition": {
-    "search": {
-      "list": []
-    },
-    "conversation": {
+    "plugin": {
       "list": []
     },
     "game": {
       "list": []
     },
-    "miniprogram": {
+    "gamePlugin": {
       "list": []
+    },
+    "miniprogram": {
+      "list": [
+        {
+          "name": "pages/home/home",
+          "pathName": "pages/home/home",
+          "scene": null
+        }
+      ]
     }
   }
 }

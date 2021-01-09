@@ -39,6 +39,15 @@
                 }
                 
                 }
+                ,{
+                    "path" : "test1/test1",
+                    "style" :                                                                                    
+                {
+                    "navigationBarTitleText": "",
+                    "enablePullDownRefresh": false
+                }
+                
+                }
             ]
       }
     ],

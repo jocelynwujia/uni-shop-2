@@ -43,7 +43,7 @@
         // 打开节流阀
         this.isloading = true
         const {data: res} = await uni.$http.get('/api/public/v1/goods/search',this.queryObj)
-        console.log(res, '商品列表')
+        // console.log(res, '商品列表')
         // 关闭节流阀
         this.isloading = false
         // 只要数据请求完毕,立即调用回调函数

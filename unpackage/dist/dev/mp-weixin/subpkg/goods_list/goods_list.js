@@ -196,18 +196,18 @@ var _default =
                 // 打开节流阀
                 _this.isloading = true;_context.next = 3;return (
                   uni.$http.get('/api/public/v1/goods/search', _this.queryObj));case 3:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;
-                console.log(res, '商品列表');
+                // console.log(res, '商品列表')
                 // 关闭节流阀
                 _this.isloading = false;
                 // 只要数据请求完毕,立即调用回调函数
                 cb && cb();if (!(
 
-                res.meta.status !== 200)) {_context.next = 10;break;}return _context.abrupt("return", uni.$showMsg());case 10:
+                res.meta.status !== 200)) {_context.next = 9;break;}return _context.abrupt("return", uni.$showMsg());case 9:
                 // 为数据重新赋值,用展开运算符,进行新旧数据拼接
                 _this.goodsList = [].concat(_toConsumableArray(_this.goodsList), _toConsumableArray(res.message.goods));
                 // this.goodsList.push(...res.message.goods)
                 // this.goodsList = res.message.goods
-                _this.total = res.message.total;case 12:case "end":return _context.stop();}}}, _callee);}))();
+                _this.total = res.message.total;case 11:case "end":return _context.stop();}}}, _callee);}))();
     },
     // 下拉触底事件
     onReachBottom: function onReachBottom() {

@@ -161,6 +161,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 var _default =
 {
   data: function data() {
@@ -173,8 +175,6 @@ var _default =
       active: 0,
       // 二级分类的数据列表
       cateLev2: [],
-      // 三级分类的数据列表
-      cateLev3: [],
       //滚动条距离顶部的距离
       scrollTop: 0 };
 
@@ -182,7 +182,7 @@ var _default =
   onLoad: function onLoad() {
     var sysInfo = uni.getSystemInfoSync();
     // console.log(sysInfo, 'ok')
-    this.wh = sysInfo.windowHeight;
+    this.wh = sysInfo.windowHeight - 50;
     this.getCateList();
   },
   methods: {
@@ -211,6 +211,11 @@ var _default =
       // console.log(item3)
       uni.navigateTo({
         url: '/subpkg/goods_list/goods_list?cid=' + item3.cat_id });
+
+    },
+    gotoSearch: function gotoSearch() {
+      uni.navigateTo({
+        url: '/subpkg/search/search' });
 
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

@@ -1,5 +1,7 @@
 <template>
 	<view>
+    <!-- 使用自定义的组件 -->
+    <my-search @click="gotoSearch"></my-search>
 		<view class="scroll-view-container">
       <!-- 左侧滚动区域 -->
 		  <scroll-view scroll-y="true" class="left-scroll-view" :style="{height: wh+'px'}">
@@ -41,8 +43,6 @@
         active:0,
         // 二级分类的数据列表
         cateLev2:[],
-        // 三级分类的数据列表
-        cateLev3:[],
         //滚动条距离顶部的距离
         scrollTop:0
 			};
@@ -50,7 +50,7 @@
     onLoad(){
       const sysInfo = uni.getSystemInfoSync()
       // console.log(sysInfo, 'ok')
-      this.wh = sysInfo.windowHeight
+      this.wh = sysInfo.windowHeight - 50
       this.getCateList()
     },
     methods:{
@@ -80,6 +80,11 @@
           uni.navigateTo({
             url:'/subpkg/goods_list/goods_list?cid='+item3.cat_id
           })
+        },
+        gotoSearch(){
+          uni.navigateTo({
+            url:'/subpkg/search/search'
+          })
         }
     }  
 	}
@@ -104,7 +109,7 @@
           top: 50%;
           transform: translateY(-50%);
           display: block;
-          content: '';
+          content: ' ';
           width: 3px;
           height: 30px;
           background-color: #C00000;

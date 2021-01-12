@@ -41,7 +41,14 @@
 </template>
 
 <script>
+  // 从vuex中按需导出mapState辅助方法
+  import {mapState,mapMutations,mapGetters} from 'vuex'
 	export default {
+    computed:{
+      // 调用mapState方法,把m_cart模块中的cart数组映射到当前页面中,作为计算属性来使用
+      ...mapState('m_cart',[]),
+      ...mapGetters('m_cart',['total'])
+    },
 		data() {
 			return {
 				// 商品详情数据
@@ -52,13 +59,12 @@
                 }, {
                     icon: 'shop',
                     text: '店铺',
-                    info: 2,
                     infoBackgroundColor:'#007aff',
                     infoColor:"red"
                 }, {
                     icon: 'cart',
                     text: '购物车',
-                    info: 2
+                    info: 0
                 }],
                 buttonGroup: [{
                   text: '加入购物车',
@@ -73,6 +79,31 @@
                 ]
 			};
 		},
+    // 监听器watch,监听total的变化
+    watch:{
+      // 1.监听total值的变化,通过第一个形参,拿到变化后的新值
+      //使用普通函数的watch侦听器，在首次页面加载后，不会调用侦听器
+      // total(newValue){
+      //   // console.log(newValue,233) 拿到新值
+      //   // 2.通过find方法,找到购物车按钮的配置对象
+      //   const findResult = this.options.find((x) => x.text === '购物车')
+      //   if(findResult){
+      //     // 3.动态为购物车的info赋值
+      //     findResult.info = newValue
+      //   }
+      // }
+      total:{
+        // handler用来定义侦听器的处理函数
+        handler(newValue){
+          const findResult = this.options.find((x) => x.text === '购物车')
+            if(findResult){
+              findResult.info = newValue
+            }
+        },
+        // 在首次加载页面时，立即调用侦听器
+        immediate:true
+      }
+    },
     onLoad(options) {
       console.log(options,'hello')
       // 获取商品的id
@@ -81,6 +112,8 @@
       this.getGoodsDetail(goods_id)
     },
     methods:{
+      // 把m_cart模块中的addToCart方法映射到当前的页面使用
+      ...mapMutations('m_cart', ['addToCart']),
       // 获取商品详情
       async getGoodsDetail(goods_id){
         const {data: res} = await uni.$http.get('/api/public/v1/goods/detail', {goods_id})
@@ -103,7 +136,8 @@
       },
       // 商品导航处理函数
       onClick (e) {
-        console.log(e,'world')
+        // console.log(e,'world')
+        // 点击左边的购物车,跳转到购物车页面
         if(e.content.text === '购物车') {
           uni.switchTab({
             url:'/pages/cart/cart'
@@ -111,11 +145,25 @@
         }
       },
       buttonClick (e) {
-        console.log(e,'hello')
-          this.options[2].info++
+        // 判断是否点击了 加入购物车 按钮
+        if(e.content.text === '加入购物车') {
+        // console.log(e,'hello')
+         // 2.组织一个商品的信息对象
+         // 再调用addToCart方法
+          const goods = {
+            goods_id:this.goods_info.goods_id,
+            goods_name:this.goods_info.goods_name,
+            goods_price:this.goods_info.goods_price,
+            goods_count:1,
+            goods_small_logo:this.goods_info.goods_small_logo,
+            goods_state:true            
+          }
+          // 3.通过this调用映射过来的addToCart方法
+          this.addToCart(goods)
       }
     }
-	}
+    },
+    }
 </script>
 
 <style lang="scss">

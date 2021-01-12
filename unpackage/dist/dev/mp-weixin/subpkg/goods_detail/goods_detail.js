@@ -156,50 +156,57 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};} //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 22));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _vuex = __webpack_require__(/*! vuex */ 13);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function ownKeys(object, enumerableOnly) {var keys = Object.keys(object);if (Object.getOwnPropertySymbols) {var symbols = Object.getOwnPropertySymbols(object);if (enumerableOnly) symbols = symbols.filter(function (sym) {return Object.getOwnPropertyDescriptor(object, sym).enumerable;});keys.push.apply(keys, symbols);}return keys;}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};if (i % 2) {ownKeys(Object(source), true).forEach(function (key) {_defineProperty(target, key, source[key]);});} else if (Object.getOwnPropertyDescriptors) {Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));} else {ownKeys(Object(source)).forEach(function (key) {Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));});}}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}var _default =
 {
+  computed: _objectSpread(_objectSpread({},
+
+  (0, _vuex.mapState)('m_cart', [])),
+  (0, _vuex.mapGetters)('m_cart', ['total'])),
+
   data: function data() {
     return {
       // 商品详情数据
@@ -210,13 +217,12 @@ var _default =
       {
         icon: 'shop',
         text: '店铺',
-        info: 2,
         infoBackgroundColor: '#007aff',
         infoColor: "red" },
       {
         icon: 'cart',
         text: '购物车',
-        info: 2 }],
+        info: 0 }],
 
       buttonGroup: [{
         text: '加入购物车',
@@ -231,6 +237,31 @@ var _default =
 
 
   },
+  // 监听器watch,监听total的变化
+  watch: {
+    // 1.监听total值的变化,通过第一个形参,拿到变化后的新值
+    //使用普通函数的watch侦听器，在首次页面加载后，不会调用侦听器
+    // total(newValue){
+    //   // console.log(newValue,233) 拿到新值
+    //   // 2.通过find方法,找到购物车按钮的配置对象
+    //   const findResult = this.options.find((x) => x.text === '购物车')
+    //   if(findResult){
+    //     // 3.动态为购物车的info赋值
+    //     findResult.info = newValue
+    //   }
+    // }
+    total: {
+      // handler用来定义侦听器的处理函数
+      handler: function handler(newValue) {
+        var findResult = this.options.find(function (x) {return x.text === '购物车';});
+        if (findResult) {
+          findResult.info = newValue;
+        }
+      },
+      // 在首次加载页面时，立即调用侦听器
+      immediate: true } },
+
+
   onLoad: function onLoad(options) {
     console.log(options, 'hello');
     // 获取商品的id
@@ -238,7 +269,9 @@ var _default =
     // 调用请求商品详情的方法
     this.getGoodsDetail(goods_id);
   },
-  methods: {
+  methods: _objectSpread(_objectSpread({},
+
+  (0, _vuex.mapMutations)('m_cart', ['addToCart'])), {}, {
     // 获取商品详情
     getGoodsDetail: function getGoodsDetail(goods_id) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var _yield$uni$$http$get, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
                   uni.$http.get('/api/public/v1/goods/detail', { goods_id: goods_id }));case 2:_yield$uni$$http$get = _context.sent;res = _yield$uni$$http$get.data;
@@ -261,7 +294,8 @@ var _default =
     },
     // 商品导航处理函数
     onClick: function onClick(e) {
-      console.log(e, 'world');
+      // console.log(e,'world')
+      // 点击左边的购物车,跳转到购物车页面
       if (e.content.text === '购物车') {
         uni.switchTab({
           url: '/pages/cart/cart' });
@@ -269,9 +303,23 @@ var _default =
       }
     },
     buttonClick: function buttonClick(e) {
-      console.log(e, 'hello');
-      this.options[2].info++;
-    } } };exports.default = _default;
+      // 判断是否点击了 加入购物车 按钮
+      if (e.content.text === '加入购物车') {
+        // console.log(e,'hello')
+        // 2.组织一个商品的信息对象
+        // 再调用addToCart方法
+        var goods = {
+          goods_id: this.goods_info.goods_id,
+          goods_name: this.goods_info.goods_name,
+          goods_price: this.goods_info.goods_price,
+          goods_count: 1,
+          goods_small_logo: this.goods_info.goods_small_logo,
+          goods_state: true };
+
+        // 3.通过this调用映射过来的addToCart方法
+        this.addToCart(goods);
+      }
+    } }) };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
